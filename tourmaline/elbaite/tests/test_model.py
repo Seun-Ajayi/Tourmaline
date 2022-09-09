@@ -1,8 +1,5 @@
 from unittest.mock import ANY
-
-import sys
-sys.path.insert(0, "../ml")
-import model as mod
+import elbaite.ml.model as mod
 
 def test_train_model(mocker, X_train, y_train):
     mock_model = mocker.patch("model.RandomForestClassifier")
