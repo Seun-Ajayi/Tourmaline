@@ -6,4 +6,4 @@ requests
 fastapi
 uvicorn
 gunicorn
-dvc
+dvc["s3"]
