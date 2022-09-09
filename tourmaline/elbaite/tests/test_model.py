@@ -1,5 +1,6 @@
 from unittest.mock import ANY
 import elbaite.ml.model as mod
+import pytest_mock as mocker
 
 def test_train_model(mocker, X_train, y_train):
     mock_model = mocker.patch("elbaite.ml.model.RandomForestClassifier")
