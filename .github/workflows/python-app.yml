@@ -45,7 +45,7 @@ jobs:
         dvc pull
     - name: Export path
       run: |
-        export PYTHONPATH="./Tourmaline/tourmaline/elbaite/ml"
+        export PYTHONPATH="./tourmaline/elbaite/ml"
     - name: Test with pytest
       run: |
         pytest
