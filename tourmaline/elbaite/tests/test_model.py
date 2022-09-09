@@ -2,7 +2,7 @@ from unittest.mock import ANY
 import elbaite.ml.model as mod
 
 def test_train_model(mocker, X_train, y_train):
-    mock_model = mocker.patch("model.RandomForestClassifier")
+    mock_model = mocker.patch("elbaite.ml.model.RandomForestClassifier")
 
     _ = mod.train_model(X_train, y_train)
 
@@ -10,9 +10,9 @@ def test_train_model(mocker, X_train, y_train):
     mock_model().fit.assert_called_once_with(X_train, y_train)
 
 def test_compute_model_metrics(mocker, y_test, preds):
-    mock_precision_score = mocker.patch("model.precision_score")
-    mock_recall_score = mocker.patch("model.recall_score")
-    mock_fbeta_score = mocker.patch("model.fbeta_score")
+    mock_precision_score = mocker.patch("elbaite.ml.model.precision_score")
+    mock_recall_score = mocker.patch("elbaite.ml.model.recall_score")
+    mock_fbeta_score = mocker.patch("elbaite.ml.model.fbeta_score")
 
     _ = mod.compute_model_metrics(y_test, preds)
 
