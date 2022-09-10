@@ -6,9 +6,13 @@ import pickle
 from sklearn.model_selection import train_test_split
 from ml.data import process_data
 from ml.model import train_model, compute_model_metrics, inference
-from tourmaline.elbaite.evaluate import evaluate
+from evaluate import evaluate
 
-OUTPUT = os.makedirs("../outputs", exist_ok=True)
+OUTPUT = "../outputs"
+os.makedirs(OUTPUT, exist_ok=True)
+MODEL = "../model"
+os.makedirs(MODEL, exist_ok=True)
+
 cat_features = [
         "workclass",
         "education",
@@ -40,10 +44,10 @@ def main(cat_cols: list=cat_features, datapath: str="../data/clean_census.csv"):
         encoder=encoder, 
         lb=lb
     )
-    
+
     # Train and save a model.
     model = train_model(X_train, y_train)
-    assets_path = os.path.join("..", "model")
+    assets_path = MODEL
     assets = ["model", "encoder", "lb"]
     assets_filenames = ["trained_model.pkl", "encoder.pkl", "lb.pkl"]
 

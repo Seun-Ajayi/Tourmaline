@@ -22,7 +22,7 @@ def evaluate(
                 subset,
                 categorical_features=cat_cols,
                 encoder=encoder,
-                label="'salary",
+                label="salary",
                 training=False,
                 lb=lb
             )
