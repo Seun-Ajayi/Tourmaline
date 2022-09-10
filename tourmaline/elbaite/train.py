@@ -48,7 +48,7 @@ def main(cat_cols: list=cat_features, datapath: str="../data/clean_census.csv"):
     # Train and save a model.
     model = train_model(X_train, y_train)
     assets_path = MODEL
-    assets = ["model", "encoder", "lb"]
+    assets = [model, encoder, lb]
     assets_filenames = ["trained_model.pkl", "encoder.pkl", "lb.pkl"]
 
     for name, asset in zip(assets_filenames, assets):

@@ -3,6 +3,10 @@ import pandas as pd
 
 from ml.data import process_data
 from ml.model import compute_model_metrics
+from utils import load_asset
+from train import cat_features
+
+
 
 def evaluate(
     data, 
@@ -12,6 +16,10 @@ def evaluate(
     encoder=None,
     lb=None
 ):
+    model = model or load_asset("trained_model.pkl")
+    encoder = encoder or load_asset("encoder.pkl")
+    lb = lb or load_asset("lb.pkl")
+
     performance_df = pd.DataFrame(columns=["feature", "precision", "recall", "fbeta"])
     for feature in cat_cols:
         feature_performance = []
@@ -35,14 +43,19 @@ def evaluate(
                     "category": category,
                     "precision": precision,
                     "recall": recall,
-                    "fbeta": fbeta
+                    "fbeta": fbeta,
                 }
             )
 
-        performance_df.append(feature_performance, ignore_index=True)
+        performance_df = performance_df.append(feature_performance, ignore_index=True)
     output_file = os.path.join(output_dir, "slice_output.txt")
     performance_df.to_csv(output_file, index=False)
 
+if __name__ == "__main__":
+    data = pd.read_csv("../data/clean_census.csv")
+    output_dir = "../outputs"
+    os.makedirs(output_dir, exist_ok=True)
+    evaluate(data, cat_features, output_dir)
         
 
 
