@@ -42,7 +42,7 @@ jobs:
         aws-region: us-east-1
     - name: Version Data
       run: |
-        dvc pul
+        dvc pull
     - name: Test with pytest
       run: |
         pytest
