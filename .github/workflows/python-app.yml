@@ -42,10 +42,7 @@ jobs:
         aws-region: us-east-1
     - name: Version Data
       run: |
-        dvc pull
-    - name: Export path
-      run: |
-        export PYTHONPATH="./tourmaline/elbaite/ml"
+        dvc pul
     - name: Test with pytest
       run: |
         pytest
