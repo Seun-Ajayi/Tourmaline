@@ -4,9 +4,8 @@ import os
 import pandas as pd
 import pickle
 from sklearn.model_selection import train_test_split
-from ml.data import process_data
-from ml.model import train_model, compute_model_metrics, inference
-from evaluate import evaluate
+from elbaite.ml.data import process_data
+from elbaite.ml.model import train_model, compute_model_metrics, inference
 
 OUTPUT = "../outputs"
 os.makedirs(OUTPUT, exist_ok=True)
@@ -23,6 +22,8 @@ cat_features = [
         "sex",
         "native-country",
     ]
+
+from elbaite.evaluate import evaluate_model
 
 def main(cat_cols: list=cat_features, datapath: str="../data/clean_census.csv"):
 
@@ -57,7 +58,7 @@ def main(cat_cols: list=cat_features, datapath: str="../data/clean_census.csv"):
 
     preds = inference(model, X_test)
     precision, recall, fbeta = compute_model_metrics(y_test, preds)
-    evaluate(data, cat_cols, OUTPUT, model, encoder, lb)
+    evaluate_model(data, cat_cols, OUTPUT, model, encoder, lb)
     return model, precision, recall, fbeta
 
 if __name__ == "__main__":
@@ -65,5 +66,3 @@ if __name__ == "__main__":
     print(f"Precision: {precision}")
     print(f"recall: {recall}")
     print(f"fbeta: {fbeta}")
-
-

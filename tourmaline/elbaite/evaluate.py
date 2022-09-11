@@ -1,14 +1,13 @@
 import os
 import pandas as pd
 
-from ml.data import process_data
-from ml.model import compute_model_metrics
-from utils import load_asset
-from train import cat_features
+from elbaite.ml.data import process_data
+from elbaite.ml.model import compute_model_metrics
+from elbaite.utils import load_asset
+from elbaite.train import cat_features
 
 
-
-def evaluate(
+def evaluate_model(
     data, 
     cat_cols,
     output_dir,
@@ -55,7 +54,7 @@ if __name__ == "__main__":
     data = pd.read_csv("../data/clean_census.csv")
     output_dir = "../outputs"
     os.makedirs(output_dir, exist_ok=True)
-    evaluate(data, cat_features, output_dir)
+    evaluate_model(data, cat_features, output_dir)
         
 
 

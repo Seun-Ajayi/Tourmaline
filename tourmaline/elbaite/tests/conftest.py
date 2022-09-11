@@ -1,5 +1,7 @@
 import pandas as pd
 import pytest
+from fastapi.testclient import TestClient
+from elbaite.main import app
 
 
 @pytest.fixture()
@@ -33,4 +35,45 @@ def test_model(preds):
 
     return ModelMocker()
 
+@pytest.fixture()
+def client():
+    return TestClient(app)
 
+@pytest.fixture()
+def below_50k_sample():
+    return {
+        "age": 39,
+        "workclass": "State-gov",
+        "fnlgt": 77516,
+        "education": "Bachelors",
+        "education_num": 13,
+        "marital_status": "Never-married",
+        "occupation": "Adm-clerical",
+        "relationship": "Not-in-family",
+        "race": "White",
+        "sex": "Male",
+        "capital_gain": 2174,
+        "capital_loss": 0,
+        "hours_per_week": 40,
+        "native_country": "United-States"
+}
+
+
+@pytest.fixture()
+def above_50k_sample():
+    return {
+        "age": 52,
+        "workclass": "Self-emp-not-inc",
+        "fnlgt": 209642,
+        "education": "HS-grad",
+        "education-num": 9,
+        "marital-status": "Married-civ-spouse",
+        "occupation": "Exec-managerial",
+        "relationship": "Husband",
+        "race": "White",
+        "sex": "Male",
+        "capital-gain": 0,
+        "capital-loss": 0,
+        "hours-per-week": 45,
+        "native-country": "United-States"
+}
