@@ -12,7 +12,7 @@ def test_predict_below_50k(client, below_50k_sample):
     assert r.status_code == 200
     assert r.json() == [0]
 
-def test_predict_below_50k(client, above_50k_sample):
+def test_predict_above_50k(client, above_50k_sample):
     r = client.post("/model/", json=above_50k_sample)
     assert r.status_code == 200
     assert r.json() == [1]
