@@ -2,7 +2,7 @@ import os
 import pickle
 from tourmaline import PROJECT_DIR
 
-ASSET_PATH = os.path.join(PROJECT_DIR, "model")
+ASSET_PATH = os.path.join(PROJECT_DIR, "tourmaline", "model")
 
 def load_asset(filename: str, asset_path: str=ASSET_PATH):
     print(f"Loading asset: {filename}")
