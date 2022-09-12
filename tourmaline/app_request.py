@@ -2,7 +2,7 @@ import json
 import requests
 
 
-url = "http://127.0.0.1:8000/model/"
+url = "https://elbaite-tourmaline.herokuapp.com/model/"
 sample = {
  'age': 52,
  'workclass': 'Self-emp-not-inc',
