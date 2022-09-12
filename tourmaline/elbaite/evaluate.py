@@ -1,10 +1,10 @@
 import os
 import pandas as pd
 
-from elbaite.ml.data import process_data
-from elbaite.ml.model import compute_model_metrics
-from elbaite.utils import load_asset
-from elbaite.train import cat_features
+from tourmaline.elbaite.ml.data import process_data
+from tourmaline.elbaite.ml.model import compute_model_metrics
+from tourmaline.elbaite.utils import load_asset
+from tourmaline.elbaite.train import cat_features
 
 
 def evaluate_model(

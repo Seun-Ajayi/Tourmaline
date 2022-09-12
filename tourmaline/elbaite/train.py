@@ -4,14 +4,15 @@ import os
 import pandas as pd
 import pickle
 from sklearn.model_selection import train_test_split
-from elbaite.ml.data import process_data
-from elbaite.ml.model import train_model, compute_model_metrics, inference
+from tourmaline.elbaite.ml.data import process_data
+from tourmaline.elbaite.ml.model import train_model, compute_model_metrics, inference
+from tourmaline import PROJECT_DIR
 
-OUTPUT = "../outputs"
-os.makedirs(OUTPUT, exist_ok=True)
-MODEL = "../model"
-os.makedirs(MODEL, exist_ok=True)
-
+OUTPUT_DIR = os.path.join(PROJECT_DIR, "outputs")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+MODEL_DIR = os.path.join(PROJECT_DIR, "model")
+os.makedirs(MODEL_DIR, exist_ok=True)
+DATA_PATH = os.path.join(PROJECT_DIR, "data/clean_census.csv")
 cat_features = [
         "workclass",
         "education",
@@ -23,9 +24,9 @@ cat_features = [
         "native-country",
     ]
 
-from elbaite.evaluate import evaluate_model
+from tourmaline.elbaite.evaluate import evaluate_model
 
-def main(cat_cols: list=cat_features, datapath: str="../data/clean_census.csv"):
+def main(cat_cols: list=cat_features, datapath: str=DATA_PATH):
 
     data = pd.read_csv(datapath)
 
@@ -48,7 +49,7 @@ def main(cat_cols: list=cat_features, datapath: str="../data/clean_census.csv"):
 
     # Train and save a model.
     model = train_model(X_train, y_train)
-    assets_path = MODEL
+    assets_path = MODEL_DIR
     assets = [model, encoder, lb]
     assets_filenames = ["trained_model.pkl", "encoder.pkl", "lb.pkl"]
 
@@ -58,7 +59,7 @@ def main(cat_cols: list=cat_features, datapath: str="../data/clean_census.csv"):
 
     preds = inference(model, X_test)
     precision, recall, fbeta = compute_model_metrics(y_test, preds)
-    evaluate_model(data, cat_cols, OUTPUT, model, encoder, lb)
+    evaluate_model(data, cat_cols, OUTPUT_DIR, model, encoder, lb)
     return model, precision, recall, fbeta
 
 if __name__ == "__main__":

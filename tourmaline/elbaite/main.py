@@ -4,17 +4,20 @@ from pydantic import BaseModel, Field
 import pandas as pd
 from fastapi.responses import JSONResponse
 
-from elbaite.ml.data import process_data
-from elbaite.ml.model import inference
-from elbaite.train import cat_features
-from elbaite.utils import load_asset
+from tourmaline.elbaite.ml.data import process_data
+from tourmaline.elbaite.ml.model import inference
+from tourmaline.elbaite.train import cat_features
+from tourmaline.elbaite.utils import load_asset
 
 
 if "DYNO" in os.environ and os.path.isdir(".dvc"):
+    print("Running DVC...")
     os.system("dvc config core.no_scm true")
     if os.system("dvc pull") != 0:
         exit("dvc pull failed")
     os.system("rm -r .dvc .apt/usr/lib/dvc")
+else:
+    print("DVC Run not performed")
 
 app = FastAPI()
 

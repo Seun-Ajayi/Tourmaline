@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 from fastapi.testclient import TestClient
-from elbaite.main import app
+from tourmaline.elbaite.main import app
 
 
 @pytest.fixture()
